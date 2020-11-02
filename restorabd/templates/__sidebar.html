@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <div class="modal fade" id="sidetinymenu" tabindex="-1" role="dialog" aria-labelledby="sideMenuHeader">
     <div class="modal-dialog sideBarDialog" role="document">
         <div class="modal-content sideBarContent" >
@@ -47,8 +47,8 @@
                         <div class="mb-1 d-lg-none d-md-none"><a class="" href="{% url 'homepage' %}">Home</a></div>
                         <div class="mb-1 d-lg-none d-md-none"><a class="" href="{% url 'restaurants:list' %}">Restaurants</a></div>
                         <div class="mb-1 d-lg-none d-md-none"><a class="" href="{% url 'orders:mylist' %}">Orders</a></div>
-                        <div class="mb-1"><a class="" href="#">Blog</a></div> 
-                        <div class="mb-1"><a class="" href="#">Terms & Conditions</a></div>  
+                        <div class="mb-1"><a class="" href="#">Blog</a></div>
+                        <div class="mb-1"><a class="" href="#">Terms & Conditions</a></div>
                         <div class="mb-1 d-lg-none d-md-none"><a class="" href="#">About Us</a></div>
                         <div class="mb-1">
                             <a  class="link text-blue" href="{% url 'accounts:login' %}?next={{ request.path }}">Sign In</a> | <a class="link text-blue" href="{% url 'accounts:register' %}?next={{ request.path }}">Sign Up</a></div>

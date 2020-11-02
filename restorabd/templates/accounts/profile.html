@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}Profile of {{ account.username }}{% endblock title %}
 {% block offer_slide_with_searchbar %}{% endblock offer_slide_with_searchbar %}
 
@@ -9,7 +9,7 @@
     <!-- USER OFFER/NOTICE -->
     <div class="container">
         {% if request.user == account and request.user.is_authenticated %}
-            <div id="userInfo" class="mt-1 row">    
+            <div id="userInfo" class="mt-1 row">
                 {% if account.notice_offer != '' %}
                     <div class="col-sm-10 offset-sm-1 alert alert-info text-center">
                         {{ account.notice_offer }}
@@ -25,7 +25,7 @@
 
         <div class="row mb-3 mt-1">
             <!-- PROFILE NAV -->
-            <div class="col-md-5 col-lg-4">    
+            <div class="col-md-5 col-lg-4">
                 <div class="text-center">
                      {% if account.pp %}
                         <img src="{{ account.pp.url }}" alt="Photo" style="width: 100%" class="img-thumbnail">
@@ -38,7 +38,7 @@
                     <a href="{{account.get_profile_url}}" class="btn btn-sm btn-success">
                         <span class="fa fa-user-circle"></span>
                     </a>
-                    
+
                     <button id="reviews" class="btn btn-sm btn-success">
                         <span class="fa fa-comments-o"></span>
                     </button>
@@ -60,9 +60,9 @@
 
             <!-- NAV CONTENT -->
             <div class="col-md-7 col-lg-8">
-                <div id="tabContent" class="card">   
+                <div id="tabContent" class="card">
                     {% include 'accounts/__include/__profile.html' %}
-                </div>     
+                </div>
             </div><!-- NAV CONTENT -->
         </div>
     </div>
@@ -103,7 +103,7 @@
                 $('#ajaxLoader').show();
                 e.preventDefault();
                 $.ajax({
-                    type: "POST", 
+                    type: "POST",
                     url: "{% url 'accounts:update' %}",
                     data: {
                         csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),

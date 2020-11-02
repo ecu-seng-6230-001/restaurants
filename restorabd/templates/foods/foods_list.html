@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}Food items{% endblock title %}
 {% block offer_slide_with_searchbar %}{% endblock offer_slide_with_searchbar %}
 
@@ -7,9 +7,9 @@
 
 {% block content %}
     <div class="container content_container mt-3 mb-4">
-        {% if food_list %}    
+        {% if food_list %}
             <div class="row">
-            {% for food in food_list %}    
+            {% for food in food_list %}
                 <!-- ITEM -->
                 <div class="col-md-4  col-lg-3 col-6 p-0 mb-2">
                     <div class="card m-1 p-1">
@@ -29,7 +29,7 @@
                     </div>
                 </div> <!-- ITEM -->
             {% endfor %}
-            </div> <!-- row -->        
+            </div> <!-- row -->
         {% else %}
             <h4 class="text-center text-danger">Nothing to show!</h4>
         {% endif %}

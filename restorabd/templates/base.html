@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,11 +45,11 @@
             </ul>
         </div>
     </div>
-    
+
     {% endblock offer_slide_with_searchbar %}
 
 
-    <!--    MESSAGES/NOTIFICATION   --> 
+    <!--    MESSAGES/NOTIFICATION   -->
     {% block messages %}
         {% if messages %}
             <div class="container-fluid" id="messages">
@@ -116,7 +116,7 @@
                         {% endif %}
                     </div>
                 </div>
-            {% endfor %}    
+            {% endfor %}
         </div>
     </section>
     <div class=" mb-3 text-center ">
@@ -162,7 +162,7 @@
 	</div>
     {% endblock back_to_top_btn %}
 
-    
+
 
 
     {% block pre_js %}{% endblock pre_js %}
@@ -172,9 +172,9 @@
     <script type="text/javascript" src="{% static 'js/notify.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     {% block js_files %}
-        
+
     {% endblock js_files %}
-    
+
     <script src="{% static 'js/wow.min.js' %}"></script>
     <script>
         new WOW().init();

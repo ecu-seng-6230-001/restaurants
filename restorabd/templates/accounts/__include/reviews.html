@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <div class="card-header">
     <h3 class="card-title text-center">Reviews</h3>
 </div>
@@ -19,7 +19,7 @@
                             </div>
                             <div class="modal-body" >
                                 <span class="text-secondary">Are you sure you want to delete <span class="alert-link text-info">{{ review.title }} ({{ review.average }})</span>?</span><br><br>
-                                
+
                                 <form action="{% url 'reviews:delete' review.pk %}" method="POST">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-sm btn-danger" >Proceed</button>
@@ -42,12 +42,12 @@
                 <div class="media-body ">
                     <h6 class="mt-0 font-weight-bold">
                         {% if request.user.is_authenticated and review.account.user == request.user %}
-                            {{ review.title }} 
+                            {{ review.title }}
                             <button class="btn btn-sm btn-danger p-0 pr-1 pl-1" data-toggle="modal" data-target="#reviewDeleteModal" type="button">
                                 <span class="fa fa-trash-o text-white"></span>
                             </button>
                         {% else %}
-                            {{ review.title }} 
+                            {{ review.title }}
                         {% endif %}
                     </h6>
                     <div class="text-danger mr-2">

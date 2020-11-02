@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <div class="container-fluid" style="background: darkgray url('{% if restaurant.pp %}{{ restaurant.pp.url }}{% else %}{% static 'img/pp.jpg' %}{% endif %}') center center no-repeat fixed; background-size: cover;">
     <div class="row bg-dark restaurant_cover_glass">
         <div class="col-12 text-center pt-3">
@@ -7,7 +7,7 @@
             {% else %}
                 <img src="{% static 'img/no_logo.png' %}" height="80" width="80" class="img-thumbnail">
             {% endif %}
-            
+
             <h2 class="text-white pt-2">
                 {{ restaurant.title }} <!-- <small style="font-size: 0.8em" class=" fa fa-heart-o"></small> -->
             </h2>
@@ -34,12 +34,12 @@
         {% if service_times %}
             <strong>Open at:</strong> {{ service_times.open_at }} | <strong>Close at:</strong> {{ service_times.close_at }}
             <br>
-            <strong>SAT: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} | 
-            <strong>SUN: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} | 
-            <strong>MON: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} | 
-            <strong>TUE: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} | 
-            <strong>WED: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} | 
-            <strong>THU: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} | 
+            <strong>SAT: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} |
+            <strong>SUN: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} |
+            <strong>MON: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} |
+            <strong>TUE: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} |
+            <strong>WED: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} |
+            <strong>THU: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %} |
             <strong>FRI: </strong>{% if service_times.saturday %}Open{% else %}Close{% endif %}
         {% endif %}
     </small>
@@ -52,5 +52,5 @@
         <a href="{{ restaurant.get_review_page_url }}" class="restaurant_tab_menu_a {{ active_r }}">
             <span class="fa fa-commenting-o"></span> Review
         </a>
-    </div>    
+    </div>
 </div>

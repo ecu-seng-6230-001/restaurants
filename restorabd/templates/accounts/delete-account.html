@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}Account Delete{% endblock title %}
 {% block offer_slide_with_searchbar %}{% endblock offer_slide_with_searchbar %}
 
@@ -9,7 +9,7 @@
         <div class="p-3 bg-success">
             <div class="alert alert-info">
                 <span class="font-weight-bold">
-                    Dear {{ACCOUNT.name}}, you are about to delete your account for forever. If you proceed then you'll - 
+                    Dear {{ACCOUNT.name}}, you are about to delete your account for forever. If you proceed then you'll -
                 </span>
                 <li>lose your orders</li>
                 <li>lose your reviews</li>

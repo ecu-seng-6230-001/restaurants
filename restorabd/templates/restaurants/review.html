@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}{{ restaurant.title }}{% endblock title %}
 {% block offer_slide_with_searchbar %}{% endblock offer_slide_with_searchbar %}
 
 {% block content %}
 
-    
+
 
     {% include 'restaurants/__include/__restaurant_cover.html' %}
 
@@ -135,7 +135,7 @@
                 {% else %}
                     <h6 class="text-center text-danger mt-5">Nobody reviewed!</h6>
                 {% endif %}
-                
+
             </div><!--    REVIEW AVERAGE RESULT -->
             <!-- items -->
             <div class="col-md-8 bg-white">
@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="modal-body" >
                                     <span class="text-secondary">Are you sure you want to delete <span class="alert-link text-info">{{ user_review.title }} ({{ user_review.average }})</span>?</span><br><br>
-                                    
+
                                     <form action="{% url 'reviews:delete' user_review.pk %}" method="POST">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-sm btn-danger" >Proceed</button>
@@ -178,15 +178,15 @@
                     <div class="media-body ">
                         <h6 class="mt-0 font-weight-bold">
                             {% if request.user.is_authenticated and user_review.account == request.user %}
-                                {{ user_review.title }} 
+                                {{ user_review.title }}
                                 <button class="btn btn-sm btn-danger p-0 pr-1 pl-1" data-toggle="modal" data-target="#reviewDeleteModal" type="button">
                                     <span class="fa fa-trash-o text-white"></span>
                                 </button>
                             {% else %}
-                                {{ user_review.title }} 
+                                {{ user_review.title }}
                             {% endif %}
                         </h6>
-                        
+
                         <div class="text-danger mr-2">
                             <span class="fa {{ user_review.star1 }}"></span>
                             <span class="fa {{ user_review.star2 }}"></span>

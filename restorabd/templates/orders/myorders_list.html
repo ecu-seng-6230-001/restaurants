@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}Order Dashboard{% endblock title %}
 {% block offer_slide_with_searchbar %}{% endblock offer_slide_with_searchbar %}
 
@@ -11,7 +11,7 @@
         <style type="text/css">
         	.table{font-size: 0.9em}
         </style>
-        {% if orders %}	
+        {% if orders %}
             <table class="table text-center table-hover">
                 <tr class="bg-dark text-info">
 					<td>#</td>
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="modal-body" >
                                     <span class="text-secondary">Are you sure you want to remove this order <span class="alert-link text-info">{{ order.order_no }}</span>?</span><br><br>
-                                    
+
                                     <form action="{% url 'orders:update-visibility' order.order_id %}" method="POST">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-sm btn-danger" >Proceed</button>
@@ -54,7 +54,7 @@
 							</a>
 						</td>
 						<td>
-							<a href="{{ order.get_absolute_url }}" class="text-white">					
+							<a href="{{ order.get_absolute_url }}" class="text-white">
 								{% if order.payment_status %}
 			                    	<span class="text-success fa fa-check-circle-o"></span>
 				                {% else %}
@@ -63,7 +63,7 @@
 				            </a>
 						</td>
 						<td>
-							<a href="{{ order.get_absolute_url }}" class="text-white">					
+							<a href="{{ order.get_absolute_url }}" class="text-white">
 								{% if order.status %}
 			                    	<span class="text-success fa fa-check-circle-o"></span>
 				                {% else %}
@@ -74,7 +74,7 @@
 						<td>
 							<button type="button" data-toggle="modal" data-target="#removeConfirmModal" class=" btn btn-sm btn-danger">
                                 <span class="fa fa-trash-o"></span>
-                            </button> 
+                            </button>
 						</td>
 					</tr>
 				{% endfor %}
