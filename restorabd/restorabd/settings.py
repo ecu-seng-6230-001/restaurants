@@ -124,6 +124,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SECURE_SSL_REDIRECT = False
 
 
 # Static files (CSS, JavaScript, Images)
