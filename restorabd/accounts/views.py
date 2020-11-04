@@ -184,7 +184,6 @@ def register_view(request):
 			account.username = getUsername(form.cleaned_data.get('name'))
 			account.set_password(raw_password=form.cleaned_data.get('password'))
 			account.name = form.cleaned_data.get('name')
-			account.phone = form.cleaned_data.get('phone')
 			account.save()
 			auth_user = authenticate(request, username=account.username, password=form.cleaned_data.get('password'))
 			login(request, auth_user)

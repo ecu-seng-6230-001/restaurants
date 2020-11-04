@@ -5,7 +5,7 @@ from general.functions import getReviewStatus
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from notifications.models import Notification
-
+from .models import Booking, Table
 
 def restauranJson_view(request):
     '''restaurants = Restaurant.objects.all().filter(is_active=True)

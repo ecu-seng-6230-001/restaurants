@@ -17,7 +17,6 @@ class Restaurant(models.Model):
     # Basic
     title 	    	   = models.CharField(max_length=500, blank=False, null=False)
     slug               = models.SlugField(blank=True, unique=True)
-    phone	   		   = models.CharField(max_length=128, blank=False, null=False)
     email      		   = models.CharField(max_length=252, blank=True, null=True, default='')
     # minimum
     min_serve_time     = models.IntegerField(default=30, blank=False, verbose_name='Minimum Serve Time')
@@ -106,23 +105,6 @@ class RestaurantReview(models.Model):
     def __str__(self):
         return self.restaurant.title + ": " + self.status + " - " + str(self.average)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class ServiceTime(models.Model):
     restaurant         = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     open_at            = models.TimeField(blank=True, default='08:00:00')
@@ -139,17 +121,6 @@ class ServiceTime(models.Model):
 
     def __str__(self):
         return self.restaurant.title
-
-
-
-
-
-
-
-
-
-
-
 
 def restaurant_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
@@ -169,3 +140,15 @@ def restaurant_post_save_receiver(sender, instance, *args, **kwargs):
 
 pre_save.connect(restaurant_pre_save_receiver, sender=Restaurant)
 post_save.connect(restaurant_post_save_receiver, sender=Restaurant)
+
+
+class Table(models.Model):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    size = models.IntegerField()
+
+
+class Booking(models.Model):
+    table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    people = models.IntegerField()
+    booking_date_time_start = models.DateTimeField()
+    booking_date_time_end = models.DateTimeField()

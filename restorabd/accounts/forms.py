@@ -53,11 +53,6 @@ class AccountRegistration(forms.Form):
 		widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name', 'id': 'name'}),
 		help_text="example: John Doe"
 	)
-	phone = forms.CharField(
-		label='', validators=[validatePhone],  
-		widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone', 'id': 'phone'}),
-		help_text='example: 01744593190'
-	)
 	password = forms.CharField(
 		label='', validators=[validatePassword],  
 		widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'id': 'password'}),
