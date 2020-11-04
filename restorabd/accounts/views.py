@@ -247,7 +247,7 @@ def updateBasicInfo(request):
 	if request.is_ajax() and request.method == "POST":	
 		account = Account.objects.get(username=request.user.username)
 		name    = request.POST['name']
-		phone   = request.POST['phone']
+		#phone   = request.POST['phone']
 		city    = request.POST['city']
 		about   = request.POST['about']
 		if valid_name(name):

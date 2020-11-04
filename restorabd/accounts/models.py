@@ -36,7 +36,7 @@ class Account(AbstractUser):
 		return reverse('accounts:profile', kwargs={'pk': self.pk})
 
 	def __str__(self):
-		return self.username + " - " + self.city + " - " + self.phone
+		return self.username + " - " + self.city
 
 	class Meta:
 		verbose_name = 'account'

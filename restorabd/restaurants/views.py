@@ -6,6 +6,7 @@ from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from notifications.models import Notification
 from .models import Booking, Table
+from . import booking
 
 def restauranJson_view(request):
     '''restaurants = Restaurant.objects.all().filter(is_active=True)
@@ -72,3 +73,17 @@ def restaurant_review(request, slug):
 
     return render(request, template_name, contex)
 
+
+def book_restaurant_table(request):
+    try:
+        table = Table.objects.all()
+    except:
+        return HttpResponseRedirect("/404notfound/")
+    template_name = 'restaurants/booktable.html'
+    contex        = {
+        'table': table,
+        'booking': booking,
+        #'booking_date_time' : booking_date_time,
+    }
+
+    return render(request, template_name, contex)
