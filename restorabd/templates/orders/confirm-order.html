@@ -44,15 +44,6 @@
                         <input id="name" name="name" required type="text" onblur="this.placeholder='Full Name'" onfocus="this.placeholder = ''" class="form-control modal_login_input" value="{{ ACCOUNT.name }}" placeholder="Full Name">
                     </div>
 
-                    <!-- PHONE -->
-                    <small id="cellMsg" class="text-center text-secondary">Enter your 11 digit phone number</small><br>
-                    <div class="input-group mb-2">
-                        <span class="input-group-btn">
-                            <button class="btn modal_login_input_iconBox" type="button"><span class="fa fa-phone"></span></button>
-                        </span>
-                        <input onkeyup="phoneValidation();" id="cell" name="cell" value="{{ ACCOUNT.phone }}" required type="text" onblur="this.placeholder='Phone number'" onfocus="this.placeholder = ''" class="form-control modal_login_input" placeholder="Phone number">
-                    </div>
-
                     <!-- LOCATION -->
                     <div class="input-group mb-2">
                         <span class="input-group-btn">

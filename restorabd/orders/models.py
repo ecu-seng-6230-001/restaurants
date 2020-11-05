@@ -10,8 +10,7 @@ from django.shortcuts import reverse
 
 PAYMENT_METHODS = (
     ('pod', 'Pay On Delivery'),
-    ('bkash', 'bKash'),
-    ('dbbl', 'DBBL'),
+    ('paypal', 'PayPal')
 )
 
 DELIVERY_TYPES = (
@@ -37,7 +36,6 @@ class Order(models.Model):
 	order_id      = models.CharField(blank=True, max_length=256, default='')
 	order_no      = models.CharField(blank=True, max_length=256, default='')
 	name          = models.CharField(max_length=100, default='', blank=False)
-	phone	   	  = models.CharField(max_length=20, default='', blank=False)
 	shipping_address = models.CharField(max_length=200, default='', blank=False)
 	status		 = models.BooleanField(default=False, blank=True)
 	payment_status = models.BooleanField(default=False, blank=True)
@@ -52,9 +50,9 @@ class Order(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('orders:detail', kwargs={'order_id': self.order_id})
-		
+
 	def __str__(self):
-		return self.name + " - " +  self.phone + " - " + self.shipping_address + " - " + str(self.cost)
+		return self.name + " - " + " - " + self.shipping_address + " - " + str(self.cost)
 
 	class Meta:
 		ordering = ['-created_at']
@@ -66,19 +64,6 @@ class Discount(models.Model):
 
 	def __str__(self):
 		return str(self.percentage) + " - " + str(self.used)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

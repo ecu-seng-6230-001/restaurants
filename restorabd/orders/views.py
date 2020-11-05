@@ -25,12 +25,12 @@ def orderManage_view(request):
 	template_name = 'orders/management_index.html'
 	if not request.user.is_staff or not request.user.is_superuser:
 		return HttpResponseRedirect('/404notfound/')
-	
+
 	orders = Order.objects.all()
 	contex = {
 		'orders': orders
 	}
-	return render(request, template_name, contex)	
+	return render(request, template_name, contex)
 
 
 def OrderDetail_view(request, order_id):
@@ -62,7 +62,7 @@ def addToCart_view(request):
 		quantity   = request.POST['totalquantity']
 		slugs      = request.POST['slugs'].split(',')
 		slugs.remove('')
-		grandtotal = float(subtotal) + restaurant.service_charge + restaurant.vat_tax 
+		grandtotal = float(subtotal) + restaurant.service_charge + restaurant.vat_tax
 		quantities = request.POST['quantities']
 		products = []
 		for slug in slugs:
@@ -70,17 +70,18 @@ def addToCart_view(request):
 				foodObj = Food.objects.get(slug=slug)
 				products.append(foodObj)
 			except:
-				pass
-		
-		cart       		= Cart()
+				print("hey")
+
+		cart = Cart()
 		cart.restaurant = restaurant
 		cart.save()
-		cart.products 	= [obj for obj in products]
+		# to fit django reqs
+		cart.products.add(*[obj for obj in products])
 		cart.subtotal 	= subtotal
 		cart.total 		= grandtotal
 		cart.quantities = quantities
 		cart.save()
-		
+
 	contex = {
 		'subtotal': subtotal,
 		'quantity': quantity,
@@ -97,15 +98,10 @@ def newOrder_view(request):
 	template_name = 'orders/confirmed-page.html'
 	if request.method == "POST":
 		cartKey  = request.POST['cart']
-		phone    = request.POST['cell']
 		order_type= request.POST['orderType']
 		account = None
 		if request.user.is_authenticated:
-			account = Account.objects.get(user=request.user)
-		else:
-			qs = Account.objects.filter(phone=phone).exists()
-			if qs:
-				account = Account.objects.get(phone=phone)
+			account = Account.objects.get(username=request.user.username)
 		order = Order()
 		order.account = account
 		try:
@@ -126,7 +122,6 @@ def newOrder_view(request):
 		except:
 			pass
 		order.name 			   = request.POST['name']
-		order.phone 		   = phone
 		order.shipping_address = request.POST['location']
 		order.order_type 	   = order_type
 		order.payment_method   = request.POST['paymentMethod']
@@ -166,15 +161,6 @@ def checkDiscountCode_view(request):
 	return HttpResponse("Bad request!")
 
 
-
-
-
-
-
-
-
-
-
 # UPDATE VISIBILITY STATUS
 @login_required
 def updateVisibility_view(request, order_id):
@@ -183,7 +169,7 @@ def updateVisibility_view(request, order_id):
 	except:
 		return HttpResponseRedirect('/404notfound/')
 	if not request.user.is_staff or not request.user.is_superuser:
-		if request.user != order.account.user or request.method != "POST":
+		if request.user.username != order.account.username or request.method != "POST":
 			return HttpResponseRedirect('/404notfound/')
 	try:
 		if order.is_active == True:
@@ -194,7 +180,7 @@ def updateVisibility_view(request, order_id):
 	except:
 		messages.success(request, "Couldn't execute the request.")
 		pass
-	
+
 	if request.user.is_staff or request.user.is_superuser:
 		return HttpResponseRedirect('/orders/management/')
 	messages.success(request, "Order has been removed from your list.")
@@ -256,7 +242,7 @@ def updateStatus_view(request, order_id):
 		notification.content = notf
 		notification.link    = '/orders/' + order.order_id + '/'
 		notification.save()
-	
+
 	return HttpResponseRedirect('/orders/management/')
 
 
