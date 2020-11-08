@@ -10,7 +10,9 @@ from django.shortcuts import reverse
 
 PAYMENT_METHODS = (
     ('pod', 'Pay On Delivery'),
-    ('paypal', 'PayPal')
+    ('paypal', 'PayPal'),
+    ('google', 'Google Pay'),
+    ('apple', 'Apple Pay')
 )
 
 DELIVERY_TYPES = (
@@ -39,7 +41,7 @@ class Order(models.Model):
 	shipping_address = models.CharField(max_length=200, default='', blank=False)
 	status		 = models.BooleanField(default=False, blank=True)
 	payment_status = models.BooleanField(default=False, blank=True)
-	shipping_charge  = models.FloatField(default=30.00, blank=True)
+	shipping_charge  = models.FloatField(default=0.0, blank=True)
 	order_type    = models.CharField(max_length=100, default='home', blank=False, choices=DELIVERY_TYPES)
 	payment_method= models.CharField(max_length=100, default="pod", choices=PAYMENT_METHODS)
 	expected_time = models.TimeField(blank=True, null=True, default='')

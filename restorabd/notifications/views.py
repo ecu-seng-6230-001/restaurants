@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @login_required
 def notificationList_view(request):
 	template_name = 'notifications.html'
-	account = Account.objects.get(user=request.user)
+	account = Account.objects.get(username=request.user.username)
 	notf_list = Notification.objects.all().filter(account=account)
 	page = request.GET.get('page', 1)
 	paginator = Paginator(notf_list, 10)

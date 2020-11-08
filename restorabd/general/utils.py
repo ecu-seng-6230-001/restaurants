@@ -1,4 +1,4 @@
-#from restaurants.models import RestaurantReview
+from restaurants.models import RestaurantReview
 from .functions import *
 
 def updateRestaurantReview(restaurantObj, review):
@@ -28,5 +28,3 @@ def updateRestaurantReview(restaurantObj, review):
 		return True
 	except:
 		return False
-
-

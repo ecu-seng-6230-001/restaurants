@@ -1,5 +1,5 @@
 from django import forms
-from general.validators import validateName, validateEmail, validatePassword, validatePhone
+from general.validators import validateName, validateEmail, validatePassword
 from django.forms.utils import ErrorList
 
 
@@ -16,12 +16,8 @@ class DivErrorList(ErrorList):
 
 class AccountUpdate(forms.Form):
 	name = forms.CharField(
-		max_length = 128, label="", validators=[validateName], 
+		max_length = 128, label="", validators=[validateName],
 		widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-	)
-	phone = forms.CharField(
-		label='', validators=[validatePhone],  
-		widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),
 	)
 
 class AccountLogin(forms.Form):
@@ -49,12 +45,12 @@ class AccountLogin(forms.Form):
 
 class AccountRegistration(forms.Form):
 	name = forms.CharField(
-		max_length = 128, label="", validators=[validateName], 
+		max_length = 128, label="", validators=[validateName],
 		widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name', 'id': 'name'}),
 		help_text="example: John Doe"
 	)
 	password = forms.CharField(
-		label='', validators=[validatePassword],  
+		label='', validators=[validatePassword],
 		widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'id': 'password'}),
 		help_text='example: hiji&@#biji28^#'
 	)
@@ -91,4 +87,3 @@ class PasswordChange(forms.Form):
 		if new_password == old_password:
 			raise forms.ValidationError("The password you are trying to change is already your current password.")
 		return super(PasswordChange, self).clean(*args, **kwargs)
-

@@ -14,11 +14,11 @@ def delete_view(request, pk):
 		review = Review.objects.get(pk=pk)
 	except:
 		return HttpResponseRedirect('/404notfound/')
-	
-	if not request.method == "POST" or review.account.user != request.user:
+
+	if not request.method == "POST" or review.account.username != request.user.username:
 		messages.warning(request, 'Unauthorized request!')
 		return HttpResponseRedirect("/restaurants/" + review.restaurant.slug + '/review/')
-	
+
 	review.delete()
 	messages.success(request, 'Review has been deleted.')
 	return HttpResponseRedirect("/restaurants/" + review.restaurant.slug + '/review/')

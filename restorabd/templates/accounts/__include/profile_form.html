@@ -7,8 +7,6 @@
         {% csrf_token %}
         <h5 class="">Name</h5>
         <input id="name" required type="text" class="form-control" name="name" value="{{account.name}}">
-        <h5 class="">Phone</h5>
-        <input required id="phone" type="text" class="form-control {% if account.is_active == False %}border-danger{% endif %}" name="phone" value="{{ account.phone }}">
         <h5 class="">City</h5>
         <select required id="city" class="form-control" name="city">
             <option value="">Select your city</option>
@@ -23,4 +21,4 @@
         </div>
     </form>
 
-</div>  
+</div>

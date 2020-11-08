@@ -53,10 +53,6 @@
                     <td>{{ order.name }}</td>
                 </tr>
                 <tr>
-                    <th>Cell</th>
-                    <td>{{ order.phone }}</td>
-                </tr>
-                <tr>
                     <th>Order At</th>
                     <td>
                         <a href="{{ order.cart.restaurant.get_absolute_url }}">
@@ -136,7 +132,7 @@
                 <tr>
                     <td>{{ order.cart.subtotal }}</td>
                     <td>{{ order.cart.total }}</td>
-                    <td class="font-weight-bold text-info"><img src="{% static 'img/taka.png' %}" style="height: 20px; width: 20px"> {{ order.cost }}</td>
+                    <td class="font-weight-bold text-info"> $ {{ order.cost }}</td>
                 </tr>
             </table>
         </div>

@@ -7,10 +7,6 @@
         <input disabled type="text" class="form-control" value="{{account.name}}">
     </div>
     {% if request.user == account.user %}
-    <div class="mb-3">
-        <h5 class="">Phone</h5>
-        <input disabled type="text" class="form-control" value="{{ account.phone }}">
-    </div>
     {% endif %}
     <div class="mb-3">
         <h5 class="">City</h5>

@@ -31,18 +31,6 @@ def getReviewStatus(score):
     elif score >= 4.50 and score <= 5.00:
         return "Very Good"
 
-def valid_phone(phone):
-    if len(phone) != 11 or phone[0] != '0' or phone[1] != '1':
-        return False
-    if not re.compile("^[0-9]+$").match(phone):
-        return False
-    return True
-def phone_already_exist(phone):
-    from accounts.models import Account
-    qs = Account.objects.filter(phone=phone)
-    if qs.exists():
-        return True
-    return False
 
 # valid name
 def valid_name(name):
@@ -122,5 +110,3 @@ def unique_slug_generator(instance, new_slug=None):
                 )
         return unique_slug_generator(instance, new_slug=new_slug)
     return slug
-
-

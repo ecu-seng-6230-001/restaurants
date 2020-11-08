@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, reverse
 from django.http import HttpResponse, JsonResponse
 from .forms import (
-	AccountRegistration, DivErrorList, 
+	AccountRegistration, DivErrorList,
 	AccountLogin, PasswordChange
 )
 from .models import Account
@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , login, logout
 from django.contrib.auth.decorators import login_required
 from random import randint
-from general.functions import getUsername, getRandomCode, valid_name, valid_phone, phone_already_exist
+from general.functions import getUsername, getRandomCode, valid_name
 from informations.models import City
 from reviews.models import Review
 from foods.models import Food
@@ -87,7 +87,7 @@ def orders_view(request, pk):
 		account= User.objects.get(pk=pk)
 	except:
 		return HttpResponseRedirect("/404notfound/")
-	contex = {		
+	contex = {
 		'orders': Order.objects.all().filter(account=account).filter(is_active=True)
 	}
 	return render(request, template_name, contex)
@@ -130,7 +130,7 @@ def profile_view(request, pk):
 
 	contex = {
 		'account': account,
-		'cities': {'Rajshahi', "Dhaka", "Rangpur", "Barisal", "Chattogram", "Sylhet", "Khulna"},
+		'cities': {"Greenville", "Winterville", "Ayden", "Kinston"},
 		'selected': account.city,
 		#'active_profile': 'active',
 	}
@@ -203,7 +203,7 @@ def activate_view(request):
 		messages.success(request, "You account is already activated.")
 		return HttpResponseRedirect('/accounts/'+account.username+'/')
 
-	# Response to ajax request	
+	# Response to ajax request
 	if request.is_ajax() and request.method == "POST":
 		code = request.POST['code']
 		if account.activation_code == code:
@@ -226,7 +226,7 @@ def sendCode_view(request):
 	msg = ''
 	if request.user.is_authenticated and request.is_ajax() and request.method == "POST":
 		account = get_object_or_404(Account, user=request.user)
-		if account.is_active == False:	
+		if account.is_active == False:
 			account.activation_code = getRandomCode()
 			account.save()
 			msg = 'New code has been sent. It normally takes 1~5 mins. to receive a code.'
@@ -244,29 +244,18 @@ def sendCode_view(request):
 def updateBasicInfo(request):
 	msg    = ''
 	signal = 'success'
-	if request.is_ajax() and request.method == "POST":	
+	if request.is_ajax() and request.method == "POST":
 		account = Account.objects.get(username=request.user.username)
 		name    = request.POST['name']
-		#phone   = request.POST['phone']
 		city    = request.POST['city']
 		about   = request.POST['about']
 		if valid_name(name):
-			if valid_phone(phone):
-				if phone != account.phone:
-					if phone_already_exist(phone) == False:
-						account.phone = phone
-						account.is_active = False
-						account.activation_code = getRandomCode()
-					else:
-						msg = phone + ' is already registered with another account.'
 				account.name     = name
 				account.about_me = about
 				account.city     = city
 				account.save()
 				msg = 'Information has been updated.'
-			
-			else:
-				msg = 'Invalid phone'	
+
 		else:
 			msg = 'Invalid name.'
 	else:
@@ -276,7 +265,7 @@ def updateBasicInfo(request):
 		signal = 'error'
 	return JsonResponse(
 		{
-			'signal': signal, 
+			'signal': signal,
 			'msg': msg,
 		}
 	)
@@ -286,7 +275,7 @@ def updateBasicInfo(request):
 @login_required
 def accountNotices_view(request):
 	if request.is_ajax() and request.method == "POST":
-		account = Account.objects.get(user=request.user)
+		account = Account.objects.get(username=request.user.username)
 		template_name = 'accounts/account-notices.html'
 		return render(request, template_name, {'account': account})
 	else:

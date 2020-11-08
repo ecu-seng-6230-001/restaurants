@@ -20,9 +20,9 @@
                 <div class="text-center bg-light m-0 pt-0 p-2">
                     <small class="text-secondary ">
                         Quantity: {{ quantity }} |  Subtotal: {{ subtotal }}<br>
-                        Tax: {{ restaurant.vat_tax }} | Service Charge: {{ restaurant.min_service_charge }}
+                        Tax: {{ restaurant.vat_tax }} | Service Charge: {{ restaurant.service_charge }}
                     </small><br>
-                    <small class="text-dark font-weight-bold">Grand Total : &nbsp;<img style="height: 20px; width: 20px" src="{% static 'img/taka.png' %}">{{ grandtotal }}</small>
+                    <small class="text-dark font-weight-bold">Grand Total : $ {{ grandtotal }}</small>
                 </div>
                 <hr>
                 <div class="text-center">
@@ -56,8 +56,9 @@
                     <div class="font-weight-bold mb-1">Payment Method</div>
                     <select name="paymentMethod" class="form-control mb-1">
                         <option value="pod">Pay on delivary</option>
-                        <option value="dbbl">DBBL (01739249008)</option>
-                        <option value="bkash">Bkash (0173924900)</option>
+                        <option value="apple">Apple Pay</option>
+                        <option value="google">Google Pay</option>
+                        <option value="paypal">PayPal</option>
                     </select>
 
                     <!-- DELIVERY TYPE -->
